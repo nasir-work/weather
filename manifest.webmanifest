@@ -1,0 +1,17 @@
+{
+  "id": "/",
+  "name": "Atmos Weather Dashboard",
+  "short_name": "Atmos Weather",
+  "description": "Live local weather, hourly forecasts, and provider comparisons.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#101a2a",
+  "theme_color": "#101a2a",
+  "categories": ["weather", "lifestyle"],
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icons/icon-maskable.svg", "sizes": "512x512", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: atmos-weather-dashboard
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: MET_USER_AGENT
+        sync: false
