@@ -1,4 +1,4 @@
-const CACHE = 'atmos-shell-v1';
+const CACHE = 'atmos-shell-v2';
 const ASSETS = ['/', '/index.html', '/style.css', '/app.js', '/manifest.webmanifest', '/icons/icon.svg', '/icons/icon-maskable.svg'];
 
 self.addEventListener('install', event => {
@@ -26,3 +26,4 @@ self.addEventListener('fetch', event => {
     return response;
   })));
 });
+
