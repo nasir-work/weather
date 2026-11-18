@@ -11,3 +11,21 @@ body.light{--bg:#eff4f8;--surface:#fff;--surface2:#f4f7fa;--text:#1a2a3b;--muted
 .chart .chart-grid-line{stroke:#fff;stroke-opacity:.08;stroke-dasharray:3 5}.chart .chart-vertical-grid{stroke-opacity:.07}.chart .chart-hour-line{stroke:#a9c9e2;stroke-opacity:.2}.chart .chart-day-line{stroke:#89caff;stroke-opacity:.62;stroke-width:1.4}.chart .chart-hour-label{fill:#d4deea;font-size:11px;font-weight:600}.chart .chart-day-label{fill:#9ccfff;font-size:9px;font-weight:700;letter-spacing:.3px}
 
 .chart .chart-grid-line{stroke:#fff;stroke-opacity:.08;stroke-dasharray:3 5}.chart .chart-vertical-grid{stroke-opacity:.07}.chart .chart-hour-line{stroke:#a9c9e2;stroke-opacity:.2}.chart .chart-day-line{stroke:#89caff;stroke-opacity:.62;stroke-width:1.4}.chart .chart-hour-label{fill:#d4deea;font-size:11px;font-weight:600}.chart .chart-day-label{fill:#9ccfff;font-size:9px;font-weight:700;letter-spacing:.3px}
+
+/* Improve hourly card contrast and make chart inspection values explicit. */
+.hour-card{color:var(--text)}
+.hour-card .hicon{color:#c9e7ff;text-shadow:0 0 14px #76bdf955;filter:drop-shadow(0 2px 4px #06101c88)}
+.hour-card .htemp{color:var(--text)}
+.hour-card .hfeel{color:#c3d0df}
+.hour-card .hrain{color:#9dd8ff}
+.hour-card .hwind{color:#d8e5f1}
+.chart-readout{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;min-height:44px;margin-top:13px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:#ffffff08}
+.chart-readout-time{color:var(--muted);font-size:11px}
+.chart-readout strong{color:var(--text);font:700 18px Manrope,sans-serif}
+.chart-readout-hint{color:var(--muted);font-size:10px}
+.chart svg{touch-action:pan-y;outline:none}
+.chart svg:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:5px}
+.chart .chart-focus-line{stroke:#d5edff;stroke-width:1.5;stroke-dasharray:4 4;pointer-events:none}
+.chart .chart-focus-point{fill:#fff;stroke:#4ba3e2;stroke-width:3;pointer-events:none}
+body.light .chart-readout{background:#fff}
+body.light .hour-card .hicon{color:#3978a7;text-shadow:none;filter:none}
