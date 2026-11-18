@@ -32,21 +32,15 @@ http.createServer(async (req, res) => {
     const point = `POINT(${lon.toFixed(4)} ${lat.toFixed(4)})`;
     const start = new Date().toISOString().slice(0, 10) + 'T00:00:00Z';
     const end = new Date(Date.now() + 7 * 86400_000).toISOString().slice(0, 10) + 'T23:59:59Z';
-    const openMeteo = new URL('https://api.open-meteo.com/v1/forecast');
-    Object.entries({ latitude: lat, longitude: lon, timezone: 'auto', forecast_days: 7,
-      hourly: 'temperature_2m,apparent_temperature,precipitation_probability,rain,snowfall,precipitation,wind_speed_10m,wind_gusts_10m,wind_direction_10m,relative_humidity_2m,cloud_cover,pressure_msl,weather_code',
-      daily: 'weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max,precipitation_sum,rain_sum,snowfall_sum,wind_speed_10m_max,wind_gusts_10m_max,sunrise,sunset',
-      current: 'temperature_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,relative_humidity_2m,wind_speed_10m,wind_direction_10m,wind_gusts_10m' }).forEach(([k,v])=>openMeteo.searchParams.set(k,v));
     const dmiUrl = new URL('https://opendataapi.dmi.dk/v1/forecastedr/collections/harmonie_dini_sf/position');
     dmiUrl.searchParams.set('coords', point); dmiUrl.searchParams.set('crs','crs84');
     dmiUrl.searchParams.set('parameter-name','temperature-2m,wind-speed-10m,gust-wind-speed-10m,wind-dir-10m,relative-humidity-2m,fraction-of-cloud-cover-2m,total-precipitation,pressure-sealevel');
     dmiUrl.searchParams.set('datetime', `${start}/${end}`);
-    const [met, om, dmi] = await Promise.allSettled([
+    const [met, dmi] = await Promise.allSettled([
       getJson(`https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=${lat.toFixed(4)}&lon=${lon.toFixed(4)}`, { 'User-Agent': process.env.MET_USER_AGENT || 'AtmosWeatherDashboard/1.0 (https://localhost:4173)' }),
-      getJson(openMeteo.toString()), getJson(dmiUrl.toString())
+      getJson(dmiUrl.toString())
     ]);
     return json(res, 200, { met: met.status === 'fulfilled' ? met.value : null, metError: met.status === 'rejected' ? met.reason.message : null,
-      openMeteo: om.status === 'fulfilled' ? om.value : null, openMeteoError: om.status === 'rejected' ? om.reason.message : null,
       dmi: dmi.status === 'fulfilled' ? dmi.value : null, dmiError: dmi.status === 'rejected' ? dmi.reason.message : null, fetchedAt: new Date().toISOString() });
   }
   if (url.pathname === '/api/search') {

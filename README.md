@@ -46,6 +46,7 @@ Serve the app behind HTTPS in production. The app makes provider requests throug
 - The current conditions panel uses Open-Meteo's `current` response (model-based current weather), not a nearby observation station.
 - Official warning feeds are not included; recommendations are clearly presented as application-generated guidance.
 - Nominatim and public forecast APIs are external services. Location is requested only on launch when automatic detection is enabled or when the location button is pressed. Location is used to request weather and geocoding only; no location history is sent or stored by the server.
+- Open-Meteo forecast and place-search calls run directly from each user's browser. Render's shared outbound IPs can encounter Open-Meteo rate limits earlier than expected; direct browser requests use the visitor's own connection. MET Norway and DMI remain server-side so their source-specific request handling stays centralized.
 
 ## Checks performed
 
@@ -53,4 +54,3 @@ Serve the app behind HTTPS in production. The app makes provider requests throug
 - Live localhost API smoke check against Open-Meteo and MET Norway at Copenhagen coordinates.
 - Live DMI EDR request and collection metadata check. The metadata query verified supported HARMONIE parameter names; the final live data request succeeded with 61 hourly time steps.
 - Browser rendering on Android Chrome, denial behavior, and interaction testing require a browser/device session with geolocation permission controls; they were not available in this environment.
-
